@@ -1,0 +1,9 @@
+cmd
+python -m tensorboard.main --logdir=log_dir
+logs
+
+https://drive.google.com/drive/folders/1dx6fe33mO9UB-_55OSzyn3EtDHeWIeWZ?usp=sharing
+model
+
+https://drive.google.com/file/d/1puRBbym1m_9Qymy8-1jU2ndSDdzhYPpf/view?usp=sharing
+model.h5
