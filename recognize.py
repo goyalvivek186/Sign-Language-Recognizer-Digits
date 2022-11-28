@@ -14,8 +14,10 @@ def predict(img, model):
     except:
         raise ValueError("Invalid image dimensions")
     
-    digits_array = model.predict(img)     
-    digits_array = np.squeeze(digits_array)
+    digits_array = model.predict(img, verbose = "0") 
+    #digit_array = array of probability of all the possible answers    
+    digits_array = np.squeeze(digits_array) #1 dimension
+    #find the ans with max probability
     digit = np.where(digits_array==np.max(digits_array))[0]
     return digit
 
@@ -30,12 +32,14 @@ def findHand(img):
 if __name__ == "__main__":
     font = cv2.FONT_HERSHEY_SIMPLEX
     model_path = "model"
+    #Comile the model previously trained
     model = loadModel(model_path)
     cap = cv2.VideoCapture(0)
     # speech = pyttsx3.init()
     # pre = -1
     while(True):
         ret,frame = cap.read()
+        #flip = lateral inverted image from front camera
         frame = cv2.flip(frame,1)
         cv2.rectangle(frame, (100,100), (300,300), (20,34,255),2)
         hand = findHand(frame)
@@ -46,7 +50,7 @@ if __name__ == "__main__":
         #     pre = digit
         cv2.imshow("Hand Sign Digit", frame)
         key = cv2.waitKey(1)
-        if key == 27:
+        if key == 27:   #27 = ASCAII value of escape
             break
 
     cap.release()

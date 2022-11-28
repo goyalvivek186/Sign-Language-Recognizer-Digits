@@ -79,14 +79,19 @@ def define_model():
 
 #training the model
 def train_model(model): 
+    # save details in log_dir while training
     tensorboard_callback = tensorflow.keras.callbacks.TensorBoard(log_dir = "log_dir", histogram_freq=1)
+    #conmpile model and add loss and optimizer
     model.compile(optimizer="adam", loss="categorical_crossentropy", metrics=['accuracy'])
+    #Training
     model.fit(X_train, Y_train, validation_data=(X_test, Y_test), epochs=25, batch_size=128, callbacks = [tensorboard_callback])
     return model
 
 if __name__ == "__main__":
     path = "/content/Sign-Language-Recognizer-master/Dataset"
     X,Y = load_data(path)
+    # X = images
+    # Y = which image
     X_train, X_test, Y_train, Y_test = preprocess_data(X,Y)
     image_number = 10
     visualize_data(X, Y, image_number)
@@ -97,7 +102,9 @@ if __name__ == "__main__":
     model.save("model")
     model.save_weights("weights/")
 
-!cp model.h5 drive/MyDrive
-!cp -r model drive/MyDrive
-!cp -r weights drive/MyDrive
-!cp -r log_dir drive/MyDrive
+
+#FOR COLAB save models and logs directly in drive
+# !cp model.h5 drive/MyDrive
+# !cp -r model drive/MyDrive
+# !cp -r weights drive/MyDrive
+# !cp -r log_dir drive/MyDrive
