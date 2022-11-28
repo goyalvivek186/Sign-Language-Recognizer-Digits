@@ -70,12 +70,24 @@ def define_model():
     model.add(Conv2D(64, kernel_size=3, padding="same", activation="relu"))
     model.add(MaxPool2D(pool_size=(2,2)))
     model.add(Flatten())
+    #learning
     model.add(Dense(units=512, activation="relu"))
     model.add(Dropout(0.4))
     model.add(Dense(units=128, activation="relu"))
     model.add(Dropout(0.25))
     model.add(Dense(units=10, activation="softmax"))
     return model
+
+#sequential = model type
+#1 layer = conv2D =     feature extraction
+#2 Layer = MaxPooling = reduce the size for fast computation
+#3 Layer = Conv
+#4 Layer = Flatten =    conver 2D to 1D
+
+#pass the features extracted and resized througn neurons for learning
+#5 Layer = Dense =      Fully connected neuron for learning
+#6 Layer = Dropout =    Prevent overfitting 
+
 
 #training the model
 def train_model(model): 
@@ -103,7 +115,7 @@ if __name__ == "__main__":
     model.save_weights("weights/")
 
 
-#FOR COLAB save models and logs directly in drive
+#For COLAB save models and logs directly in drive
 # !cp model.h5 drive/MyDrive
 # !cp -r model drive/MyDrive
 # !cp -r weights drive/MyDrive

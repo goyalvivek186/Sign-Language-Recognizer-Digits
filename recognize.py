@@ -14,7 +14,7 @@ def predict(img, model):
     except:
         raise ValueError("Invalid image dimensions")
     
-    digits_array = model.predict(img, verbose = "0") 
+    digits_array = model.predict(img) 
     #digit_array = array of probability of all the possible answers    
     digits_array = np.squeeze(digits_array) #1 dimension
     #find the ans with max probability
@@ -55,3 +55,5 @@ if __name__ == "__main__":
 
     cap.release()
     cv2.destroyAllWindows()
+
+
